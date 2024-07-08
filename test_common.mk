@@ -1,6 +1,7 @@
 SHELL=bash
 
-## a common Makefile for simple docker commands making testing faster/easier 
+## a common Makefile for simplifying docker commands making testing faster/easier
+## basically -t(ags) and --name are automtically added to docker build and docher run  
 
 help:
 	@echo -e "\n## ATTENTION: you need to set variable T=<TAG> to the correct tag.\n\n"

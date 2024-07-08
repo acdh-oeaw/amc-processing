@@ -44,13 +44,32 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: shell-env
-          build-args: |
-            BUILDPACK_URL=${{ inputs.BUILDPACK_URL }}
           platforms: linux/amd64
           push: true
-          secret-files: |
-            "secrets_env=./secrets.env"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Create tags based on git data
+        id: metaperl
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}/shell
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value={{sha}}
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: perl-env
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.metaperl.outputs.tags }}
+          labels: ${{ steps.metaperl.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
