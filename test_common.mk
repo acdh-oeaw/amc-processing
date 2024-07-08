@@ -35,7 +35,6 @@ b: i
 rund:
 	# detached: -d
 	docker run -d --rm -it  \
-	-v $$(pwd -P)/home_user:/home/user:rw \
 	-v /home/hannes/acdh_resources:/mnt/acdh_resources:rw  \
 	-v /opt/utils/apa-utils:/opt/utils/apa-utils \
 	--name test_$T test:$T /bin/bash && \
