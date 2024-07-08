@@ -55,7 +55,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository }}/shell
+            ghcr.io/${{ github.repository }}/perl
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -78,7 +78,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository }}/shell
+            ghcr.io/${{ github.repository }}/java8
           tags: |
             type=ref,event=branch
             type=ref,event=pr
