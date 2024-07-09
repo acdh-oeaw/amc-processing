@@ -125,23 +125,22 @@ fi
 ## JAVA_HOME auf JDK setzen
 # export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk.x86_64
 
-### add to  PYTHONPATH 
-if [ -z "$PYTHONPATH" ]; then export PYTHONPATH=${DISSECT_HOME}; else export PYTHONPATH=${DISSECT_HOME}:$PYTHONPATH; fi
+
+# CLASSPATH=".:/usr/local/share/java/commons-cli-1.2.jar:/usr/local/share/java/commons-io-2.4.jar"
+
 
 ### PERL5LIB wird am Anfang von @INC eingehängt
-export PERL5LIB=.:/opt/utils/apa-utils/perl:/opt/utils/apa-utils/tei/perl:/opt/utils/other-utils/common-utils/perl:/opt/utils/other-utils/evaluate-nlp-tools/perl:/opt/utils/other-utils/parlat_utils/perl:/opt/utils/other-utils/monitorcontainr/perl
+export PERL5LIB=/opt/utils/apa-utils/perl:/opt/utils/other-utils/common-utils/perl:/opt/utils/other-utils/evaluate-nlp-tools/perl
+
 
 # Maven
 # export MAVEN_HOME="/opt/apache-maven-3.2.3"
 
-export PATH=.:/home/user/bin:/opt/utils/apa-utils:/opt/utils/apa-utils/tei:/opt/utils/other-utils/voice_data_utils:/opt/utils/other-utils/common-utils:/opt/utils/other-utils/parlat_utils:/opt/utils/other-utils/monitorcontainr:$PATH
+
+export PATH=.:/home/user/bin:/opt/utils/apa-utils:$PATH
 
 
-alias treetagger='/opt/tt/cmd/tree-tagger-german-utf8'
-alias rftagger='/opt/rftagger/cmd/rftagger-german-utf8'
-alias wrapperrftt='/opt/rftagger/tools/rft-tt-german.sh'
 
 
-# for testing, WHICH .bashrc has been activated
-export BAR="from generic-shell-image"
+
 

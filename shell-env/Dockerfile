@@ -8,7 +8,10 @@ LABEL maintainer="Hannes Pirker <hannes.pirker@oeaw.ac.at>" \
 ENV HOME=/home/user
 
 COPY _bashrc_for_Docker /home/user/.bashrc
+COPY _bashaliases_for_Docker /home/user/.bash_aliases
 COPY _bashrc_for_Docker /root/.bashrc
+COPY _bashrc_for_Docker /root/.bashrc
+
 
 ENV DEBIAN_FRONTEND=noninteractive
 
