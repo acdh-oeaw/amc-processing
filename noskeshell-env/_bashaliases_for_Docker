@@ -1,0 +1,53 @@
+### common aliases which will be sourced in .bashrc 
+
+## in bash which does not follow aliaeses! therefore alias which to type
+alias which='type -a'
+
+###  avoid the citation message because I cannot run --bibtex
+alias parallel='parallel --no-notice'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+## some more ls aliases
+alias l='ls -l'
+alias lt='ls -lt | head -n 15'
+alias lsd="ls -l | egrep '^d'"
+alias lsl="ls -l | egrep '^l'"
+alias lh="ls -lh"
+
+# function psg () {ps uxaw | grep $1};
+alias psg="ps -auxw | grep $1"
+
+alias countfiles='find .                -type f | wc -l'
+alias countdiffs='find . -name "*.diff" -type f | wc -l'
+alias countvert='find  . -name "*.vert" -type f | wc -l'
+
+## count number of token in verticals
+alias countverttoken='find  . -name "*.vert" -type f -print0 | parallel -0 cat | grep -c -v "^<"' 
+
+
+### remove empty directories
+alias remove_empty_dirs='find $(pwd) -type d -empty -print0 | xargs -0 rmdir -v'
+
+### remove empty files
+alias remove_empty_files='find $(pwd) -type f -size 0 -print0 | xargs -0 rm -v'
+
+
+alias show_empty_files='find $(pwd) -type f -empty '  
+
+
+## MANPAGER explizit auf 'less' setzen
+export MANPAGER=less
+
+### make alias for renaming file(s) to "_xxx" 
+alias rename_underscore='rename -v s/^/_/'
+## undo-underscrore
+alias rename_undo-underscore='rename -v s/^_//'
+

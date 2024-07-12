@@ -7,7 +7,7 @@ help:
 	@echo -e "\n## ATTENTION: you need to set variable T=<TAG> to the correct tag.\n\n"
 	@echo -e "      currently: TAG=$(T)\n"
 	@echo -e "i     docker images\n"
-	@echo -e "re    re-run the full circle: stop + rmi + buid + run + enter\n"
+	@echo -e "re    re-run the full circle: stop + rmi + build + run + enter\n"
 	@echo -e "b	build"
 	@echo -e "rund	run in DETACHED mode\n"
 	@echo -e "e       enter as root"
@@ -31,13 +31,18 @@ b: i
 #	--name test_$T \
 #	test:$T /bin/bash
 
+run:
+	docker run --rm -it  \
+	-v /home/hannes/acdh_resources:/mnt/acdh_resources:rw  \
+	-v /opt/utils:/opt/utils \
+	--name test_$T test:$T /bin/bash 
 
 ## run *d*etached	
 rund:
 	# detached: -d
 	docker run -d --rm -it  \
 	-v /home/hannes/acdh_resources:/mnt/acdh_resources:rw  \
-	-v /opt/utils/apa-utils:/opt/utils/apa-utils \
+	-v /opt/utils:/opt/utils \
 	--name test_$T test:$T /bin/bash && \
 	echo -e "\n------------\n" && \
 	docker ps && \
@@ -52,12 +57,22 @@ stop:
 rmi:
 	echo -e "\# docker rmi ..."
 	docker rmi test:$T
+
+## run the REMOTE image from github
+rr:
+	docker run --name $(T)_remote --rm -it -u 0:0 ghcr.io/acdh-oeaw/amc-processing/$T /bin/bash
 	
 	
-## enter as root
+## enter - user can be overwritten in importing Makefile
 e:	
 	docker exec -it -u user test_$T /bin/bash
-		
+
+
+## enter explicitely as "user"
+euser:	
+	docker exec -it -u user test_$T /bin/bash
+	
+## enter as root		
 eroot:	
 	docker exec -it -u root test_$T /bin/bash
 	
