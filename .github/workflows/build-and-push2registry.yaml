@@ -25,6 +25,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      ###########################################
       ## shell
       - name: Create tags based on git data
         id: meta
@@ -51,13 +52,88 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      ## perl
+#      ## perl
+#      - name: Create tags based on git data
+#        id: metaperl
+#        uses: docker/metadata-action@v5
+#        with:
+#          images: |
+#            ghcr.io/${{ github.repository }}/perl
+#          tags: |
+#            type=ref,event=branch
+#            type=ref,event=pr
+#            type=semver,pattern={{version}}
+#            type=semver,pattern={{major}}.{{minor}}
+#            type=raw,value=latest,enable={{is_default_branch}}
+#            type=raw,value={{sha}}
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: perl-env
+#          platforms: linux/amd64
+#          push: true
+#          tags: ${{ steps.metaperl.outputs.tags }}
+#          labels: ${{ steps.metaperl.outputs.labels }}
+#          cache-from: type=gha
+#          cache-to: type=gha,mode=max 
+#####################
+#      ## java8     
+#      - name: Create tags based on git data
+#        id: metajava8
+#        uses: docker/metadata-action@v5
+#        with:
+#          images: |
+#            ghcr.io/${{ github.repository }}/java8
+#          tags: |
+#            type=ref,event=branch
+#            type=ref,event=pr
+#            type=semver,pattern={{version}}
+#            type=semver,pattern={{major}}.{{minor}}
+#            type=raw,value=latest,enable={{is_default_branch}}
+#            type=raw,value={{sha}}
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: java8-env
+#          platforms: linux/amd64
+#          push: true
+#          tags: ${{ steps.metajava8.outputs.tags }}
+#          labels: ${{ steps.metajava8.outputs.labels }}
+#          cache-from: type=gha
+#          cache-to: type=gha,mode=max
+############################
+#      ## spacyamc
+#      - name: Create tags based on git data
+#        id: metaspacyamc
+#        uses: docker/metadata-action@v5
+#        with:
+#          images: |
+#            ghcr.io/${{ github.repository }}/spacyamc
+#          tags: |
+#            type=ref,event=branch
+#            type=ref,event=pr
+#            type=semver,pattern={{version}}
+#            type=semver,pattern={{major}}.{{minor}}
+#            type=raw,value=latest,enable={{is_default_branch}}
+#            type=raw,value={{sha}}
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: spacyamc-env
+#          platforms: linux/amd64
+#          push: true
+#          tags: ${{ steps.metaspacyamc.outputs.tags }}
+#          labels: ${{ steps.metaspacyamc.outputs.labels }}
+#          cache-from: type=gha
+#          cache-to: type=gha,mode=max
+#############################
+      ## noskeshell
       - name: Create tags based on git data
-        id: metaperl
+        id: metanoskeshell
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository }}/perl
+            ghcr.io/${{ github.repository }}/noskeshell
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -68,59 +144,11 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: perl-env
+          context: noskeshell-env
           platforms: linux/amd64
           push: true
-          tags: ${{ steps.metaperl.outputs.tags }}
-          labels: ${{ steps.metaperl.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max 
-      ## java8     
-      - name: Create tags based on git data
-        id: metajava8
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ghcr.io/${{ github.repository }}/java8
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=raw,value={{sha}}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: java8-env
-          platforms: linux/amd64
-          push: true
-          tags: ${{ steps.metajava8.outputs.tags }}
-          labels: ${{ steps.metajava8.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      ## spacyamc
-      - name: Create tags based on git data
-        id: metaspacyamc
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ghcr.io/${{ github.repository }}/spacyamc
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=raw,value={{sha}}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: spacyamc-env
-          platforms: linux/amd64
-          push: true
-          tags: ${{ steps.metaspacyamc.outputs.tags }}
-          labels: ${{ steps.metaspacyamc.outputs.labels }}
+          tags: ${{ steps.metanoskeshell.outputs.tags }}
+          labels: ${{ steps.metanoskeshell.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           

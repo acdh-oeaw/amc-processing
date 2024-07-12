@@ -122,22 +122,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-## JAVA_HOME auf JDK setzen
-# export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk.x86_64
-
-
-# CLASSPATH=".:/usr/local/share/java/commons-cli-1.2.jar:/usr/local/share/java/commons-io-2.4.jar"
-
 
 ### PERL5LIB wird am Anfang von @INC eingehängt
 export PERL5LIB=/opt/utils/apa-utils/perl:/opt/utils/other-utils/common-utils/perl:/opt/utils/other-utils/evaluate-nlp-tools/perl
 
-
-# Maven
-# export MAVEN_HOME="/opt/apache-maven-3.2.3"
-
-
-export PATH=.:/home/user/bin:/opt/utils/apa-utils:$PATH
+export PATH=.:/home/user/bin:/opt/utils/apa-utils:/opt/utils/other-utils/common-utils:$PATH
 
 
 

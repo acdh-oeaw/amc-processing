@@ -90,11 +90,6 @@ cpanm XML::Twig && \
 cpanm XML::Writer && \
 cpanm YAML
 
-## libreoffice converter - required by monitorcontainr 
-RUN apt-get -y update && \
-apt-get install -y unoconv
-
-
 ## FAILED for the FOLLOWING: 
 ## cpanm Inline::Python 
 ## cpanm  RDF::Converter::CSV
@@ -103,10 +98,6 @@ apt-get install -y unoconv
 #RUN sed -i '/^user:\w/d' /etc/shadow && \
 #userdel user
 ## User user does not exist if image is build without docker-tools
-
-# Create a non-root user and group with a home directory
-#USER root
-#RUN groupadd -r user && useradd -r -g user user
 
 # Switch to the non-root user
 USER user
