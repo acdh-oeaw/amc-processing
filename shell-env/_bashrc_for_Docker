@@ -90,6 +90,7 @@ xterm*|rxvt*)
     ;;
 esac
 
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -101,6 +102,15 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -123,7 +133,10 @@ if ! shopt -oq posix; then
 fi
 
 ## JAVA_HOME auf JDK setzen
-# export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk.x86_64
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+## take care that saxon is on the classpath
+CLASSPATH=.:/opt/utils/saxonHE9-7-0-20J/saxon9he.jar
 
 ### add to  PYTHONPATH 
 if [ -z "$PYTHONPATH" ]; then export PYTHONPATH=${DISSECT_HOME}; else export PYTHONPATH=${DISSECT_HOME}:$PYTHONPATH; fi

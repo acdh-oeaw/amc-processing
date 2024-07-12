@@ -2,7 +2,7 @@ FROM quay.io/toolbx-images/ubuntu-toolbox:22.04
 
 LABEL maintainer="Hannes Pirker <hannes.pirker@oeaw.ac.at>" \
       version="1.0" \
-      description="A 'rich' shell environment"
+      description="A 'rich' shell environment for processing amc etc."
 
 # copy to both $HOME and /root (which is the $HOME for root)
 ENV HOME=/home/user
@@ -10,8 +10,7 @@ ENV HOME=/home/user
 COPY _bashrc_for_Docker /home/user/.bashrc
 COPY _bashaliases_for_Docker /home/user/.bash_aliases
 COPY _bashrc_for_Docker /root/.bashrc
-COPY _bashrc_for_Docker /root/.bashrc
-
+COPY _bashaliases_for_Docker /root/.bash_aliases
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -41,11 +40,14 @@ apt-get install -y \
 	rar \
 	rename \
 	rsync \
+	sfst \
 	time \
 	tree \
+	tmux \
 	tzdata \
 	unrar \
 	unzip \
+	unoconv \
 	vim   \
 	w3c-sgml-lib \
 	wget \
@@ -63,10 +65,17 @@ RUN locale-gen en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+## ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+RUN apt update && \
+apt-get install -y  openjdk-11-jdk ant && \
+apt-get install -y  xsltproc
+
 # Create a non-root user and group with a home directory
 USER root
 RUN groupadd -g 1000 user
-RUN useradd -u 1000 -g 1000 user
+RUN useradd -u 1000 -g 1000 -s /bin/bash user
 RUN find /home/user -exec chown -h 1000 {} \; 
 RUN find /home/user -exec chgrp -h 1000 {} \;  
 
@@ -75,6 +84,5 @@ USER user
 
 # Set the working directory
 WORKDIR /home/user
-
 
 # CMD ["bash", "-c", "while : ; do sleep 600 ;done"]
