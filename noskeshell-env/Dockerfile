@@ -19,36 +19,45 @@ USER root
 RUN microdnf -y update && \
     microdnf -y install dnf && \
     dnf -y install \
+	cpan \
         dnf-plugins-core \
         epel-release \
-	procps-ng \
+        git \
 	less \
+	libxml2 \
+	libxml2-devel \
 	make \
+	parallel \
+	perl-App-cpanminus \
+	prename \
+	procps-ng \
+     	tar \
+     	unzip \
 	vim \
 	wget  \
-     	zip \
-     	unzip \
-	parallel \
-	prename \
-	cpan \
-	perl-App-cpanminus \
-	libxml2 \
-	libxml2-devel
+     	zip
+	
+## provisions for tmux 	
+RUN  dnf install -y crypto-policies-scripts && \
+     update-crypto-policies --set DEFAULT:SHA1 && \
+     dnf install -y http://galaxy4.net/repo/galaxy4-release-9-current.noarch.rpm \
+          tmux
 	
 ## pass "yes" to the 1st invokation of cpan for supressing cpan's questions for configuration 
-RUN     yes '' | cpanm Data::Dumper ; \
-	cpanm JSON ; \
-	cpanm pp ; \
-	cpanm JSON::XS ; \
+RUN     yes '' | \
+	cpanm Data::Dumper ; \
 	cpanm File::BaseDir ; \
+	cpanm JSON ; \
+	cpanm JSON::XS ; \
 	cpanm Moose ; \
 	cpanm MooseX::Storage ; \
-	cpanm Text::CSV ; \
-	cpanm Text::CSV_XS ; \
 	cpanm Spreadsheet::ParseExcel ; \
 	cpanm Spreadsheet::WriteExcel ; \
 	cpanm Spreadsheet::XLSX ; \
 	cpanm Switch ; \
+	cpanm Text::CSV ; \
+	cpanm Text::CSV_XS ; \
+	cpanm pp ; \
 	cpanm -f XML::LibXML
 	
 ## replace rename by prename 
