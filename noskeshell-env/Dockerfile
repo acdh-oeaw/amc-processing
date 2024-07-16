@@ -59,7 +59,8 @@ RUN ln -s -f /usr/bin/prename /usr/bin/rename
 RUN groupmod --gid 1019 www-data && \
     usermod --gid 1019 --uid 1019 www-data 
 
-RUN groupadd -g 100 users
+RUN groupadd -f -g 100 users
+
 RUN useradd -u 1000 -g 100 -s /bin/bash user
 RUN find /home/user -exec chown -h 1000 {} \; 
 RUN find /home/user -exec chgrp -h 100  {} \; 
