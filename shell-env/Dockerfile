@@ -74,10 +74,11 @@ apt-get install -y  xsltproc
 
 # Create a non-root user and group with a home directory
 USER root
-RUN groupadd -g 1000 user
-RUN useradd -u 1000 -g 1000 -s /bin/bash user
+RUN groupadd         -g 100              users
+RUN useradd  -u 1000 -g 100 -s /bin/bash user
+
 RUN find /home/user -exec chown -h 1000 {} \; 
-RUN find /home/user -exec chgrp -h 1000 {} \;  
+RUN find /home/user -exec chgrp -h 100 {} \;  
 
 # Switch to the non-root user
 USER user
