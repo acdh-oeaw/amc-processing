@@ -33,7 +33,8 @@ RUN microdnf -y update && \
 	cpan \
 	perl-App-cpanminus \
 	libxml2 \
-	libxml2-devel
+	libxml2-devel \
+	tmux
 	
 ## pass "yes" to the 1st invokation of cpan for supressing cpan's questions for configuration 
 RUN     yes '' | cpanm Data::Dumper ; \
@@ -54,13 +55,14 @@ RUN     yes '' | cpanm Data::Dumper ; \
 ## replace rename by prename 
 RUN ln -s -f /usr/bin/prename /usr/bin/rename
 
+## 1019 is already present in the noske-image!
 RUN groupmod --gid 1019 www-data && \
     usermod --gid 1019 --uid 1019 www-data 
 
-RUN groupadd -g 1000 user
-RUN useradd -u 1000 -g 1000 -s /bin/bash user
+RUN groupadd -g 100 users
+RUN useradd -u 1000 -g 100 -s /bin/bash user
 RUN find /home/user -exec chown -h 1000 {} \; 
-RUN find /home/user -exec chgrp -h 1000 {} \; 
+RUN find /home/user -exec chgrp -h 100  {} \; 
 
 WORKDIR /home/user
 
