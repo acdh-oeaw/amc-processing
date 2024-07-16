@@ -33,8 +33,7 @@ RUN microdnf -y update && \
 	cpan \
 	perl-App-cpanminus \
 	libxml2 \
-	libxml2-devel \
-	tmux
+	libxml2-devel
 	
 ## pass "yes" to the 1st invokation of cpan for supressing cpan's questions for configuration 
 RUN     yes '' | cpanm Data::Dumper ; \
