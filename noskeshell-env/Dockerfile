@@ -38,10 +38,10 @@ RUN microdnf -y update && \
      	zip
 	
 ## provisions for tmux 	
-RUN  dnf install -y crypto-policies-scripts && \
-     update-crypto-policies --set DEFAULT:SHA1 && \
-     dnf install -y http://galaxy4.net/repo/galaxy4-release-9-current.noarch.rpm \
-          tmux
+RUN dnf install -y crypto-policies-scripts && \
+  update-crypto-policies --set DEFAULT:SHA1 && \
+  dnf install -y http://galaxy4.net/repo/galaxy4-release-9-current.noarch.rpm && \
+  dnf install -y tmux 
 	
 ## pass "yes" to the 1st invokation of cpan for supressing cpan's questions for configuration 
 RUN     yes '' | \
