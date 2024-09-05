@@ -55,6 +55,12 @@ apt-get install -y \
 	xsltproc \
 	xz-utils \
 	zip
+	
+## pandoc: in ubuntu 22.04 apt installed version 2.9 which is too old for us - therefore install it directly from .deb ( ubuntu 24.04 then already contains pandoc-3.2.1
+RUN cd /tmp && \
+    wget https://github.com/jgm/pandoc/releases/download/3.3/pandoc-3.3-1-amd64.deb && \
+    sudo dpkg -i pandoc-3.3-1-amd64.deb && \
+    rm pandoc-3*.deb
 
 RUN rm -f /etc/localtime && \
     ln -s /usr/share/zoneinfo/Europe/Vienna /etc/localtime && \

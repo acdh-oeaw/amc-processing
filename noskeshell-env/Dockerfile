@@ -14,12 +14,20 @@ COPY _bashaliases_for_Docker /home/www-data/.bash_aliases
 COPY _bashrc_for_Docker /root/.bashrc
 COPY _bashaliases_for_Docker /root/.bash_aliases
 
+
+## unclear: we do not want to have the registry-files in the repo 
+## currently we keep them on acdh-resources and copy them manually to $MANATEE_REGISTRY :-(
+### copy the registry_files
+#COPY registry  	/var/lib/manatee/registry 
+
+
 USER root
 
 RUN microdnf -y update && \
     microdnf -y install dnf && \
     dnf -y install \
 	cpan \
+	diffutils \
         dnf-plugins-core \
         epel-release \
         git \
