@@ -25,6 +25,7 @@ apt-get install -y \
 	git \
 	htop \
 	less \
+	libhtml-tidy-perl \
 	libjudy-dev \
 	liblzma-dev \
 	locales \
@@ -47,6 +48,7 @@ apt-get install -y \
 	tzdata \
 	unrar \
 	unzip \
+	unrtf \
 	unoconv \
 	vim   \
 	w3c-sgml-lib \
