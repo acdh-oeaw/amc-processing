@@ -142,7 +142,7 @@ CLASSPATH=.:/opt/utils/saxonHE9-7-0-20J/saxon9he.jar
 if [ -z "$PYTHONPATH" ]; then export PYTHONPATH=${DISSECT_HOME}; else export PYTHONPATH=${DISSECT_HOME}:$PYTHONPATH; fi
 
 ### PERL5LIB wird am Anfang von @INC eingehängt
-export PERL5LIB=.:/opt/utils/apa-utils/perl:/opt/utils/apa-utils/tei/perl:/opt/utils/other-utils/common-utils/perl:/opt/utils/other-utils/evaluate-nlp-tools/perl:/opt/utils/other-utils/parlat_utils/perl:/opt/utils/other-utils/monitorcontainr/perl
+export PERL5LIB=.:/opt/utils/apa-utils/perl:/opt/utils/apa-utils/tei/perl:/opt/utils/other-utils/common-utils/perl:/opt/utils/other-utils/evaluate-nlp-tools/perl:/opt/utils/other-utils/parlat_utils/perl:/opt/utils/other-utils/monitorcontainr/perl:/opt/utils/other-utils/aac_utils/perl:/opt/utils/other-utils/sfst_utils/perl:./perl
 
 # Maven
 # export MAVEN_HOME="/opt/apache-maven-3.2.3"

@@ -28,6 +28,8 @@ apt-get install -y \
 	libhtml-tidy-perl \
 	libjudy-dev \
 	liblzma-dev \
+	libreoffice \
+	libreoffice-java-common \
 	locales \
 	locate \
 	lsof \
@@ -53,6 +55,7 @@ apt-get install -y \
 	vim   \
 	w3c-sgml-lib \
 	wget \
+	xmlstarlet \
 	xml-twig-tools \
 	xsltproc \
 	xz-utils \
