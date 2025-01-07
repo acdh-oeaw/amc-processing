@@ -1,4 +1,4 @@
-FROM quay.io/toolbx-images/ubuntu-toolbox:22.04
+FROM quay.io/toolbx/ubuntu-toolbox:22.04
 
 LABEL maintainer="Hannes Pirker <hannes.pirker@oeaw.ac.at>" \
       version="1.0" \
