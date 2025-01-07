@@ -14,8 +14,8 @@ COPY _bashaliases_for_Docker /root/.bash_aliases
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get -y update && \
-apt-get install -y \
+RUN apt-get -y update && apt-get -y full-upgrade && \
+    apt-get install -y \
 	apache2-utils \
 	apt-utils \
 	build-essential \
@@ -59,7 +59,8 @@ apt-get install -y \
 	xml-twig-tools \
 	xsltproc \
 	xz-utils \
-	zip
+	zip && \
+	apt-get -y clean
 	
 ## pandoc: in ubuntu 22.04 apt installed version 2.9 which is too old for us - therefore install it directly from .deb ( ubuntu 24.04 then already contains pandoc-3.2.1
 RUN cd /tmp && \
@@ -81,15 +82,15 @@ ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 RUN apt update && \
 apt-get install -y  openjdk-11-jdk ant && \
-apt-get install -y  xsltproc
+apt-get install -y  xsltproc && \
+apt-get -y clean
 
 # Create a non-root user and group with a home directory
 USER root
-RUN groupadd -f      -g 100              users
-RUN useradd  -u 1000 -g 100 -s /bin/bash user
-
-RUN find /home/user -exec chown -h 1000 {} \; 
-RUN find /home/user -exec chgrp -h 100 {} \;  
+RUN groupadd -f      -g 100              users && \
+    useradd  -u 1000 -g 100 -s /bin/bash user && \
+    find /home/user -exec chown -h 1000 {} \; && \
+    find /home/user -exec chgrp -h 100 {} \;  
 
 # Switch to the non-root user
 USER user

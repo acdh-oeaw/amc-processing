@@ -14,7 +14,8 @@ apt-get install -y libgdbm-dev && \
 apt-get install -y zlib1g-dev && \
 apt-get install -y libexpat1-dev && \
 apt-get install -y perl-doc && \
-apt-get install -y libstring-diff-perl 
+apt-get install -y libstring-diff-perl && \
+apt-get -y clean
 
 RUN apt-get -y update && \
 cpanm  --mirror https://cpan.metacpan.org Archive::SevenZip && \
