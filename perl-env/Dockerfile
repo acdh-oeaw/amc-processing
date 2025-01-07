@@ -84,7 +84,9 @@ cpanm XML::Smart && \
 cpanm XML::Tidy && \
 cpanm XML::Twig && \
 cpanm XML::Writer && \
-cpanm YAML
+cpanm YAML && \
+rm -rf /home/user/.cpanm/work
+##  /home/user/.cpanm/work is only used during build and can be deleted (200+ MB)
 
 ### RDF::Query ist (only?) required in dbnary-utils
 ### 2025-01: cpanm RDF Query failed due to 2 failed tests in dependency Module::Pluggable 
@@ -93,14 +95,13 @@ RUN cpanm --force Module::Pluggable && \
 cpanm RDF::Query && \
 cpanm RDF::Simple && \
 cpanm RDF::Trine && \
-cpanm RDF::Trine::Store::DBI::SQLite 
+cpanm RDF::Trine::Store::DBI::SQLite && \
+rm -rf /home/user/.cpanm/work
+##  /home/user/.cpanm/work is only used during build and can be deleted
 
 ## FAILED for the FOLLOWING: 
 ## cpanm Inline::Python 
 ## cpanm  RDF::Converter::CSV
- 
-##  /home/user/.cpanm/work is only used during build and can be deleted (200+ MB)
-RUN rm -rf /home/user/.cpanm/work
 
 ## remove user 'user' before injecting it again / existing entry for user has to be removed from /etc/shadow with sed 
 #RUN sed -i '/^user:\w/d' /etc/shadow && \
