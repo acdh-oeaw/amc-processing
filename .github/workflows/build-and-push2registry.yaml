@@ -27,14 +27,14 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      ###########################################
-      ## shell
+      ##################################
+      ## python
       - name: Create tags based on git data
-        id: meta
+        id: metapython
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository }}/shell
+            ghcr.io/${{ github.repository }}/python
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -45,38 +45,63 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: shell-env
+          context: python3-env
           platforms: linux/amd64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.metapython.outputs.tags }}
+          labels: ${{ steps.metapython.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      ##################################
-      ## perl
-      - name: Create tags based on git data
-        id: metaperl
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ghcr.io/${{ github.repository }}/perl
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=raw,value={{sha}}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: perl-env
-          platforms: linux/amd64
-          push: true
-          tags: ${{ steps.metaperl.outputs.tags }}
-          labels: ${{ steps.metaperl.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max 
+#      ###########################################
+#      ## shell
+#      - name: Create tags based on git data
+#        id: meta
+#        uses: docker/metadata-action@v5
+#        with:
+#          images: |
+#            ghcr.io/${{ github.repository }}/shell
+#          tags: |
+#            type=ref,event=branch
+#            type=ref,event=pr
+#            type=semver,pattern={{version}}
+#            type=semver,pattern={{major}}.{{minor}}
+#            type=raw,value=latest,enable={{is_default_branch}}
+#            type=raw,value={{sha}}
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: shell-env
+#          platforms: linux/amd64
+#          push: true
+#          tags: ${{ steps.meta.outputs.tags }}
+#          labels: ${{ steps.meta.outputs.labels }}
+#          cache-from: type=gha
+#          cache-to: type=gha,mode=max
+#      ##################################
+#      ## perl
+#      - name: Create tags based on git data
+#        id: metaperl
+#        uses: docker/metadata-action@v5
+#        with:
+#          images: |
+#            ghcr.io/${{ github.repository }}/perl
+#          tags: |
+#            type=ref,event=branch
+#            type=ref,event=pr
+#            type=semver,pattern={{version}}
+#            type=semver,pattern={{major}}.{{minor}}
+#            type=raw,value=latest,enable={{is_default_branch}}
+#            type=raw,value={{sha}}
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: perl-env
+#          platforms: linux/amd64
+#          push: true
+#          tags: ${{ steps.metaperl.outputs.tags }}
+#          labels: ${{ steps.metaperl.outputs.labels }}
+#          cache-from: type=gha
+#          cache-to: type=gha,mode=max
 ##################### java8 TO BE DELETED 
 #      ## java8     
 #      - name: Create tags based on git data
